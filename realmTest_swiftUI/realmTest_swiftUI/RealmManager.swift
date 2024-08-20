@@ -17,6 +17,7 @@ class RealmManager: ObservableObject {
     init() {
         openRealm()
         getTasks()
+        print("realm 위치: ", Realm.Configuration.defaultConfiguration.fileURL!)
     }
     
     
