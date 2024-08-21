@@ -12,18 +12,36 @@ class ViewController02: UIViewController, UITableViewDataSource {
     
     private var bodyPartSetsCount: [String: Int] = [:]
     private var tableView = UITableView()
+    private var label = UILabel()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        label.text = "8월 부위별 총 세트 수"
         
         tableView.dataSource = self
         
+        view.addSubview(label)
         view.addSubview(tableView)
-        tableView.frame = view.bounds
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let safe = view.safeAreaLayoutGuide
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            label.topAnchor.constraint(equalTo: safe.topAnchor, constant: 8),
+            
+            tableView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10),
+            tableView.leadingAnchor.constraint(equalTo: safe.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: safe.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safe.bottomAnchor)
+        ])
+        
+       
         
         let schedules = fetchAugustSchedules()
         bodyPartSetsCount = calculateSetsByBodyPart(schedules: schedules)
