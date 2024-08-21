@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private let realmManager = RealmManager()
+    private let realmManager = RealmManager.shared
     
     let weightTextField = UITextField()
     let bodyFatTextField = UITextField()
