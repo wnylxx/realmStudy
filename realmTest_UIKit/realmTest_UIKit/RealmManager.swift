@@ -20,6 +20,7 @@ class RealmManager {
         }
         openRealm()
         createExercisesSampleData()
+        generateScheduleSampleData()
         
     }
     
@@ -96,4 +97,52 @@ extension RealmManager {
 }
 
 
+extension RealmManager {
+    
+    func generateScheduleSampleData() {
+        guard let localRealm = localRealm else {return}
+        
+        if localRealm.objects(Schedule.self).isEmpty {
+            
+            let allExercises = localRealm.objects(Exercise.self)
+            var schedules: [Schedule] = []
+            
+            var date = DateComponents(calendar: Calendar.current, year: 2024, month: 7, day: 1).date!
+            let endDate = DateComponents(calendar: Calendar.current, year: 2024, month: 8, day: 31).date!
+            
+            while date <= endDate {
+                var scheduleExercises: [ScheduleExercise] = []
+                
+                // 각 날짜 별로 3개씩 운동 추가
+                for i in 0..<3 {
+                    // 운동을 모든 운동중에 랜덤 선택
+                    guard let exercise = allExercises.randomElement() else { continue }
+                    
+                    let sets = [
+                        ScheduleExerciseSet(order: 1, weight: 60, reps: 10, isCompleted: true),
+                        ScheduleExerciseSet(order: 2, weight: 60, reps: 8, isCompleted: true),
+                        ScheduleExerciseSet(order: 3, weight: 60, reps: 6, isCompleted: true)
+                    ]
+                    
+                    let schedulExercise = ScheduleExercise(exercise: exercise, order: i+1, isCompleted: true, sets: sets)
+                    scheduleExercises.append(schedulExercise)
+                }
+                
+                let schedule = Schedule(date: date, exercises: scheduleExercises)
+                schedules.append(schedule)
+                
+                date = Calendar.current.date(byAdding: .day, value: 1, to: date)!
+                
+            }
+            
+            try! localRealm.write {
+                localRealm.add(schedules)
+            }
+            
+            print("Schedule 샘플 데이터를 추가하였습니다.")
+        } else {
+            print("Schedule 데이터가 존재합니다.")
+        }
+    }
+}
 

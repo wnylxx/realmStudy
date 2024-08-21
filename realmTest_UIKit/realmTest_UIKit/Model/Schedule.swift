@@ -32,7 +32,7 @@ class Schedule: Object {
 
 class ScheduleExercise: Object {
     @Persisted(primaryKey: true) var id: ObjectId // 고유 ID
-    @Persisted var exercise: Exercise? // 운동 - id, 이름, 부위
+    @Persisted var exercise: Exercise? // 운동 - id, 이름, 부위 <- 이거 없으면 안되잖아. 근데 옵셔널 해제하면 에러 생김
     @Persisted var order: Int // 운동 순서
     @Persisted var isCompleted: Bool // 운동 완료 여부
     @Persisted var sets: List<ScheduleExerciseSet> // 운동 세트
