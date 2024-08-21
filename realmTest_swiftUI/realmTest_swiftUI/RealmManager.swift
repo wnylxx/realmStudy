@@ -31,6 +31,7 @@ class RealmManager: ObservableObject {
             print("Error opening Realm: \(error)")
         }
     }
+    // create read update delete
     
     func addTask(taskTitle: String) {
         if let localRealm = localRealm {

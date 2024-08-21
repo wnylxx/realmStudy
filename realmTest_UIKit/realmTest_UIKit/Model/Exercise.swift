@@ -18,4 +18,19 @@ class Exercise: Object {
     @Persisted var recentWeight: Int = 0 // 최근 무게 (옵션)
     @Persisted var maxWeight: Int = 0 // 최대 무게 (옵션)
     @Persisted var isCustom: Bool = false // 운동 커스텀 여부
+    
+    
+    convenience init(name: String, bodyParts: [BodyPart], descriptionText: String, image: Data?, totalReps: Int, recentWeight: Int, maxWeight: Int, isCustom: Bool) {
+        self.init()
+        self.name = name
+        self.bodyParts.append(objectsIn: bodyParts)
+        self.descriptionText = descriptionText
+        self.image = image
+        self.totalReps = totalReps
+        self.recentWeight = recentWeight
+        self.maxWeight = maxWeight
+        self.isCustom = isCustom
+    }
+    
+    
 }
