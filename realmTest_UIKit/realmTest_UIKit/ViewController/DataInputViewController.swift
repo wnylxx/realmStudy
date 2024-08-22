@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class DataInputViewController: UIViewController {
     private let realmManager = RealmManager.shared
     
     let weightTextField = UITextField()

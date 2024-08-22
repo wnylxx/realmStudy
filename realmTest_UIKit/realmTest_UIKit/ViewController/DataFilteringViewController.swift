@@ -7,10 +7,12 @@
 
 import UIKit
 
-class ViewController02: UIViewController, UITableViewDataSource {
+class DataFilteringViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let realm = RealmManager.shared.localRealm
     
-    var bodyPartSetsCount: [(key: String, value: Int)] = []
+//    var bodyPartSetsCount: [(key: String, value: Int)] = []
+    private var bodyPartDataList: [BodyPartData] = []
+    
     private var tableView = UITableView()
     private var label = UILabel()
     
@@ -21,11 +23,13 @@ class ViewController02: UIViewController, UITableViewDataSource {
         label.text = "8월 부위별 총 세트 수"
         
         tableView.dataSource = self
+        tableView.delegate = self
         
         view.addSubview(label)
         view.addSubview(tableView)
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(BodyPartTableViewCell.self, forCellReuseIdentifier: "BodyPartCell")
         
         label.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -44,21 +48,21 @@ class ViewController02: UIViewController, UITableViewDataSource {
        
         
         let schedules = fetchAugustSchedules()
-        bodyPartSetsCount = calculateSetsByBodyPart(schedules: schedules)
-        tableView.reloadData()
+        bodyPartDataList = calculateSetsByBodyPartAndExercise(schedules: schedules)
+        
         
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bodyPartSetsCount.count
+        return bodyPartDataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let bodyPart = bodyPartSetsCount[indexPath.row].key
-        let setsCount = bodyPartSetsCount[indexPath.row].value
-        cell.textLabel?.text = "\(bodyPart) : \(setsCount)세트"
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BodyPartCell", for: indexPath) as! BodyPartTableViewCell
+        let data = bodyPartDataList[indexPath.row]
+        cell.configure(with: data)
         return cell
     }
     
@@ -100,4 +104,43 @@ class ViewController02: UIViewController, UITableViewDataSource {
         return sortedCount
     }
     
+    
+    func calculateSetsByBodyPartAndExercise(schedules: [Schedule]) -> [BodyPartData] {
+        var bodyPartDataList: [BodyPartData] = []
+
+        for schedule in schedules {
+            for scheduleExercise in schedule.exercises {
+                let completedSets = scheduleExercise.sets.filter { $0.isCompleted }
+                let setsCount = completedSets.count
+
+                for bodyPart in scheduleExercise.exercise!.bodyParts {
+                    let bodyPartName = bodyPart.rawValue
+                    
+                    if let index = bodyPartDataList.firstIndex(where: { $0.bodyPart == bodyPartName }) {
+                        bodyPartDataList[index].totalSets += setsCount
+                        let exerciseName = scheduleExercise.exercise!.name
+                        if let exerciseIndex = bodyPartDataList[index].exercises.firstIndex(where: { $0.name == exerciseName }) {
+                            bodyPartDataList[index].exercises[exerciseIndex].setsCount += setsCount
+                        } else {
+                            bodyPartDataList[index].exercises.append(ExerciseSets(name: exerciseName, setsCount: setsCount))
+                        }
+                    } else {
+                        let newData = BodyPartData(bodyPart: bodyPartName, totalSets: setsCount, exercises: [ExerciseSets(name: scheduleExercise.exercise!.name, setsCount: setsCount)])
+                        bodyPartDataList.append(newData)
+                    }
+                }
+            }
+        }
+
+        bodyPartDataList.sort { $0.totalSets > $1.totalSets }
+        for i in 0..<bodyPartDataList.count {
+            bodyPartDataList[i].exercises.sort {$0.setsCount > $1.setsCount}
+        }
+        
+        
+        return bodyPartDataList
+    }
 }
+
+
+

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1863021F2C74D07D00CA32AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1863021E2C74D07D00CA32AA /* AppDelegate.swift */; };
 		186302212C74D07D00CA32AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186302202C74D07D00CA32AA /* SceneDelegate.swift */; };
-		186302232C74D07D00CA32AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186302222C74D07D00CA32AA /* ViewController.swift */; };
+		186302232C74D07D00CA32AA /* DataInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186302222C74D07D00CA32AA /* DataInputViewController.swift */; };
 		186302262C74D07D00CA32AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 186302252C74D07D00CA32AA /* Base */; };
 		186302282C74D07E00CA32AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186302272C74D07E00CA32AA /* Assets.xcassets */; };
 		1863022B2C74D07E00CA32AA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1863022A2C74D07E00CA32AA /* Base */; };
@@ -19,14 +19,16 @@
 		189AE4A72C74E45C0077A1D3 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189AE4A62C74E45C0077A1D3 /* Schedule.swift */; };
 		189F0B932C756DB700DA70BA /* InBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189F0B922C756DB700DA70BA /* InBody.swift */; };
 		189F0B952C756E4400DA70BA /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189F0B942C756E4400DA70BA /* RealmManager.swift */; };
-		189F0B972C758C3400DA70BA /* ViewController02.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189F0B962C758C3400DA70BA /* ViewController02.swift */; };
+		189F0B972C758C3400DA70BA /* DataFilteringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189F0B962C758C3400DA70BA /* DataFilteringViewController.swift */; };
+		18FAA0802C77156500B62B8F /* BodyPartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA07F2C77156500B62B8F /* BodyPartData.swift */; };
+		18FAA0832C771B3B00B62B8F /* BodyPartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA0822C771B3B00B62B8F /* BodyPartTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1863021B2C74D07D00CA32AA /* realmTest_UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = realmTest_UIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1863021E2C74D07D00CA32AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186302202C74D07D00CA32AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		186302222C74D07D00CA32AA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		186302222C74D07D00CA32AA /* DataInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInputViewController.swift; sourceTree = "<group>"; };
 		186302252C74D07D00CA32AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		186302272C74D07E00CA32AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1863022A2C74D07E00CA32AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,7 +38,9 @@
 		189AE4A62C74E45C0077A1D3 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		189F0B922C756DB700DA70BA /* InBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InBody.swift; sourceTree = "<group>"; };
 		189F0B942C756E4400DA70BA /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		189F0B962C758C3400DA70BA /* ViewController02.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController02.swift; sourceTree = "<group>"; };
+		189F0B962C758C3400DA70BA /* DataFilteringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFilteringViewController.swift; sourceTree = "<group>"; };
+		18FAA07F2C77156500B62B8F /* BodyPartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPartData.swift; sourceTree = "<group>"; };
+		18FAA0822C771B3B00B62B8F /* BodyPartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPartTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,11 +75,10 @@
 			isa = PBXGroup;
 			children = (
 				186302322C74D09300CA32AA /* Model */,
+				18FAA0812C7715AF00B62B8F /* ViewController */,
+				18FAA0822C771B3B00B62B8F /* BodyPartTableViewCell.swift */,
 				1863021E2C74D07D00CA32AA /* AppDelegate.swift */,
 				186302202C74D07D00CA32AA /* SceneDelegate.swift */,
-				186302222C74D07D00CA32AA /* ViewController.swift */,
-				189F0B962C758C3400DA70BA /* ViewController02.swift */,
-				189F0B942C756E4400DA70BA /* RealmManager.swift */,
 				186302242C74D07D00CA32AA /* Main.storyboard */,
 				186302272C74D07E00CA32AA /* Assets.xcassets */,
 				186302292C74D07E00CA32AA /* LaunchScreen.storyboard */,
@@ -87,12 +90,23 @@
 		186302322C74D09300CA32AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				189F0B942C756E4400DA70BA /* RealmManager.swift */,
 				186302332C74D0B400CA32AA /* bodyPart.swift */,
 				186302382C74D59100CA32AA /* Exercise.swift */,
 				189AE4A62C74E45C0077A1D3 /* Schedule.swift */,
 				189F0B922C756DB700DA70BA /* InBody.swift */,
+				18FAA07F2C77156500B62B8F /* BodyPartData.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		18FAA0812C7715AF00B62B8F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				186302222C74D07D00CA32AA /* DataInputViewController.swift */,
+				189F0B962C758C3400DA70BA /* DataFilteringViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,14 +186,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				189F0B972C758C3400DA70BA /* ViewController02.swift in Sources */,
+				189F0B972C758C3400DA70BA /* DataFilteringViewController.swift in Sources */,
 				189AE4A72C74E45C0077A1D3 /* Schedule.swift in Sources */,
+				18FAA0832C771B3B00B62B8F /* BodyPartTableViewCell.swift in Sources */,
 				189F0B952C756E4400DA70BA /* RealmManager.swift in Sources */,
 				186302392C74D59100CA32AA /* Exercise.swift in Sources */,
-				186302232C74D07D00CA32AA /* ViewController.swift in Sources */,
+				186302232C74D07D00CA32AA /* DataInputViewController.swift in Sources */,
 				189F0B932C756DB700DA70BA /* InBody.swift in Sources */,
 				1863021F2C74D07D00CA32AA /* AppDelegate.swift in Sources */,
 				186302342C74D0B400CA32AA /* bodyPart.swift in Sources */,
+				18FAA0802C77156500B62B8F /* BodyPartData.swift in Sources */,
 				186302212C74D07D00CA32AA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
