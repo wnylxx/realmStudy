@@ -10,7 +10,7 @@ import UIKit
 class ViewController02: UIViewController, UITableViewDataSource {
     let realm = RealmManager.shared.localRealm
     
-    private var bodyPartSetsCount: [String: Int] = [:]
+    var bodyPartSetsCount: [(key: String, value: Int)] = []
     private var tableView = UITableView()
     private var label = UILabel()
     
@@ -56,8 +56,8 @@ class ViewController02: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let bodyPart = Array(bodyPartSetsCount.keys)[indexPath.row]
-        let setsCount = bodyPartSetsCount[bodyPart] ?? 0
+        let bodyPart = bodyPartSetsCount[indexPath.row].key
+        let setsCount = bodyPartSetsCount[indexPath.row].value
         cell.textLabel?.text = "\(bodyPart) : \(setsCount)세트"
         return cell
     }
@@ -75,7 +75,7 @@ class ViewController02: UIViewController, UITableViewDataSource {
         return result
     }
     
-    func calculateSetsByBodyPart(schedules: [Schedule]) -> [String:Int] {
+    func calculateSetsByBodyPart(schedules: [Schedule]) -> [(key: String, value: Int)] {
         var bodyPartSetsCount: [String: Int] = [:]
         
         for schedule in schedules {
@@ -90,7 +90,14 @@ class ViewController02: UIViewController, UITableViewDataSource {
                 }
             }
         }
-        return bodyPartSetsCount
+        
+        // 정열된 배열은 딕셔너리가 아닌 튜플로 반환 된다. [(key: String, value: Int)]
+        let sortedCount = bodyPartSetsCount.sorted {$0.value > $1.value }
+        
+        // cell에 뿌릴 때 key, value로 접근해야함.
+        // 여기서 Dictionary로 다시 반환해 주면 Dictionary는 순서를 보장하지 않기 때문에 정렬 순서가 꼬이게 된다.
+        
+        return sortedCount
     }
     
 }
