@@ -10,9 +10,7 @@ import UIKit
 class DataFilteringViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let realm = RealmManager.shared.localRealm
     
-    // 높이 설정
-    private let defaultCellHeight: CGFloat = 30
-    private let exerciseViewHeight: CGFloat = 40
+
     
     
 //    var bodyPartSetsCount: [(key: String, value: Int)] = []
@@ -30,8 +28,8 @@ class DataFilteringViewController: UIViewController, UITableViewDataSource, UITa
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 44
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 44
         
         
         view.addSubview(label)
@@ -68,30 +66,47 @@ class DataFilteringViewController: UIViewController, UITableViewDataSource, UITa
         return bodyPartDataList.count
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let data = bodyPartDataList[indexPath.row]
-//        
-//        if data.isStackViewVisible {
-//                // `exercisesStackView`가 보이는 상태일 때 높이 계산
-//                let exercisesCount = data.exercises.count
-//                return defaultCellHeight + (exerciseViewHeight * CGFloat(exercisesCount))
-//            } else {
-//                // `exercisesStackView`가 숨겨진 상태일 때 기본 높이 반환
-//                return defaultCellHeight
-//            }
-//        
-//    }
+    //    // 수동 높이 설정
+        private let defaultCellHeight: CGFloat = 40
+        private let exerciseViewHeight: CGFloat = 25
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        let data = bodyPartDataList[indexPath.row]
+        
+        if data.isStackViewVisible {
+                // `exercisesStackView`가 보이는 상태일 때 높이 계산
+                let exercisesCount = data.exercises.count
+                return defaultCellHeight + (exerciseViewHeight * CGFloat(exercisesCount))
+            } else {
+                // `exercisesStackView`가 숨겨진 상태일 때 기본 높이 반환
+                return defaultCellHeight
+            }
+        
     }
     
+    func toggleStackViewVisibility(for indexPath: IndexPath) {
+        var data = bodyPartDataList[indexPath.row]
+        data.isStackViewVisible.toggle()
+        bodyPartDataList[indexPath.row] = data
+        
+        tableView.beginUpdates()
+        tableView.reloadRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "BodyPartCell", for: indexPath) as! BodyPartTableViewCell
         let data = bodyPartDataList[indexPath.row]
-        cell.configure(with: data)
+        
+        cell.configure(with: data, at: indexPath) { [weak self] indexPath in
+            self?.toggleStackViewVisibility(for: indexPath)
+        }
+        
         return cell
     }
     

@@ -11,7 +11,7 @@ struct BodyPartData {
     let bodyPart: String
     var totalSets: Int
     var exercises: [ExerciseSets]
-    var isStackViewVisible: Bool = true // 초기값은 true
+    var isStackViewVisible: Bool = true
 }
 
 struct ExerciseSets {

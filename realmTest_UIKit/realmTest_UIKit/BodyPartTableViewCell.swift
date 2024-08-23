@@ -13,44 +13,57 @@ class BodyPartTableViewCell: UITableViewCell {
     private let exercisesStackView = UIStackView()
     private let toggleButton = UIButton(type: .system)
     
+    private var indexPath: IndexPath?
+    private var toggleVisibilityAction: ((IndexPath) -> Void)?
+    
     private var isStackViewVisible = true {
-            didSet {
-                // Toggle the visibility of the stack view
-                if isStackViewVisible {
-                    if exercisesStackView.superview == nil {
-                        contentView.addSubview(exercisesStackView)
-                        NSLayoutConstraint.activate([
-                            exercisesStackView.topAnchor.constraint(equalTo: bodyPartLabel.bottomAnchor, constant: 8),
-                            exercisesStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-                            exercisesStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                            exercisesStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
-                        ])
-                    }
-                } else {
-                    exercisesStackView.removeFromSuperview()
+        didSet {
+            // 스택 뷰의 가시성을 변경합니다
+            if isStackViewVisible {
+                // 스택 뷰를 추가합니다
+                if exercisesStackView.superview == nil {
+                    contentView.addSubview(exercisesStackView)
+                    NSLayoutConstraint.activate([
+                        exercisesStackView.topAnchor.constraint(equalTo: bodyPartLabel.bottomAnchor, constant: 8),
+                        exercisesStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+                        exercisesStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                        exercisesStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+                    ])
                 }
-                
-                toggleButton.setTitle(isStackViewVisible ? "Hide" : "Show", for: .normal)
-                
-                if let tableView = superview as? UITableView {
-                    tableView.beginUpdates()
-                    tableView.endUpdates()
-                }
+            } else {
+                // 스택 뷰를 제거합니다
+                exercisesStackView.removeFromSuperview()
+            }
+            
+            toggleButton.setTitle(isStackViewVisible ? "Hide" : "Show", for: .normal)
+            
+            //                setNeedsLayout()
+            //                layoutIfNeeded()
+            
+            // 테이블 뷰 업데이트
+            if let tableView = superview as? UITableView {
+                tableView.beginUpdates()
+                tableView.endUpdates()
             }
         }
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         bodyPartLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        bodyPartLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
+        bodyPartLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+
         
         exercisesStackView.axis = .vertical
-        exercisesStackView.spacing = 4
+//        exercisesStackView.spacing = 12
         exercisesStackView.alignment = .leading
+        exercisesStackView.distribution = .equalSpacing
         exercisesStackView.translatesAutoresizingMaskIntoConstraints = false
         
         toggleButton.setTitle("Hide", for: .normal)
-                toggleButton.addTarget(self, action: #selector(toggleStackViewVisibility), for: .touchUpInside)
+        toggleButton.addTarget(self, action: #selector(toggleStackViewVisibility), for: .touchUpInside)
         
         contentView.addSubview(bodyPartLabel)
         contentView.addSubview(toggleButton)
@@ -58,14 +71,18 @@ class BodyPartTableViewCell: UITableViewCell {
         bodyPartLabel.translatesAutoresizingMaskIntoConstraints = false
         toggleButton.translatesAutoresizingMaskIntoConstraints = false
         
+        
+        
         NSLayoutConstraint.activate([
-                    bodyPartLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-                    bodyPartLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-
-                    toggleButton.centerYAnchor.constraint(equalTo: bodyPartLabel.centerYAnchor),
-                    toggleButton.leadingAnchor.constraint(equalTo: bodyPartLabel.trailingAnchor, constant: 8),
-                    toggleButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                ])
+            bodyPartLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            bodyPartLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            bodyPartLabel.trailingAnchor.constraint(equalTo: toggleButton.leadingAnchor, constant: -8),
+            
+            toggleButton.centerYAnchor.constraint(equalTo: bodyPartLabel.centerYAnchor),
+            toggleButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            
+        ])
+        
     }
     
     required init?(coder: NSCoder) {
@@ -73,11 +90,14 @@ class BodyPartTableViewCell: UITableViewCell {
     }
     
     @objc private func toggleStackViewVisibility() {
-        isStackViewVisible.toggle()
+        
+        guard let indexPath = indexPath else { return }
+                toggleVisibilityAction?(indexPath)
+        
     }
     
     
-    func configure(with data: BodyPartData) {
+    func configure(with data: BodyPartData, at indexPath: IndexPath, toggleVisibilityAction: @escaping (IndexPath) -> Void) {
             bodyPartLabel.text = "\(data.bodyPart) : \(data.totalSets)세트"
             
             exercisesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -88,8 +108,9 @@ class BodyPartTableViewCell: UITableViewCell {
                 exercisesStackView.addArrangedSubview(exerciseView)
             }
             
-            // Call the visibility toggle to add/remove stack view
-//            isStackViewVisible = isStackViewVisible
+            self.indexPath = indexPath
+            self.toggleVisibilityAction = toggleVisibilityAction
+            isStackViewVisible = data.isStackViewVisible
         }
 }
 
@@ -110,7 +131,7 @@ class HorizontalExerciseView: UIView {
 
     private func setupView() {
         stackView.axis = .horizontal
-        stackView.alignment = .fill
+//        stackView.alignment = .fill
         stackView.spacing = 10
 
         nameLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
