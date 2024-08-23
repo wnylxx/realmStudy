@@ -10,6 +10,11 @@ import UIKit
 class DataFilteringViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let realm = RealmManager.shared.localRealm
     
+    // 높이 설정
+    private let defaultCellHeight: CGFloat = 30
+    private let exerciseViewHeight: CGFloat = 40
+    
+    
 //    var bodyPartSetsCount: [(key: String, value: Int)] = []
     private var bodyPartDataList: [BodyPartData] = []
     
@@ -24,6 +29,10 @@ class DataFilteringViewController: UIViewController, UITableViewDataSource, UITa
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 44
+        
         
         view.addSubview(label)
         view.addSubview(tableView)
@@ -50,6 +59,7 @@ class DataFilteringViewController: UIViewController, UITableViewDataSource, UITa
         let schedules = fetchAugustSchedules()
         bodyPartDataList = calculateSetsByBodyPartAndExercise(schedules: schedules)
         
+        tableView.reloadData()
         
     }
     
@@ -57,6 +67,25 @@ class DataFilteringViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bodyPartDataList.count
     }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        let data = bodyPartDataList[indexPath.row]
+//        
+//        if data.isStackViewVisible {
+//                // `exercisesStackView`가 보이는 상태일 때 높이 계산
+//                let exercisesCount = data.exercises.count
+//                return defaultCellHeight + (exerciseViewHeight * CGFloat(exercisesCount))
+//            } else {
+//                // `exercisesStackView`가 숨겨진 상태일 때 기본 높이 반환
+//                return defaultCellHeight
+//            }
+//        
+//    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
