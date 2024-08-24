@@ -61,6 +61,14 @@ class DataFilteringViewController: UIViewController, UITableViewDataSource, UITa
         
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            // data의 isStackViewVisible 값을 토글
+            bodyPartDataList[indexPath.row].isStackViewVisible.toggle()
+            
+            // 선택된 셀만 리로드
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bodyPartDataList.count

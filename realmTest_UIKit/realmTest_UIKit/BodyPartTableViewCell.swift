@@ -54,10 +54,10 @@ class BodyPartTableViewCell: UITableViewCell {
         bodyPartLabel.font = UIFont.boldSystemFont(ofSize: 16)
         bodyPartLabel.setContentHuggingPriority(.defaultLow, for: .vertical)
         bodyPartLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-
+        
         
         exercisesStackView.axis = .vertical
-//        exercisesStackView.spacing = 12
+        //        exercisesStackView.spacing = 12
         exercisesStackView.alignment = .leading
         exercisesStackView.distribution = .equalSpacing
         exercisesStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,26 +92,31 @@ class BodyPartTableViewCell: UITableViewCell {
     @objc private func toggleStackViewVisibility() {
         
         guard let indexPath = indexPath else { return }
-                toggleVisibilityAction?(indexPath)
+        toggleVisibilityAction?(indexPath)
+        
+    }
+    
+    func toggleStackViewVisibilityDelegate() {
+        isStackViewVisible.toggle()
         
     }
     
     
     func configure(with data: BodyPartData, at indexPath: IndexPath, toggleVisibilityAction: @escaping (IndexPath) -> Void) {
-            bodyPartLabel.text = "\(data.bodyPart) : \(data.totalSets)세트"
-            
-            exercisesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-            
-            for exercise in data.exercises {
-                let exerciseView = HorizontalExerciseView()
-                exerciseView.configure(name: exercise.name, setsCount: exercise.setsCount)
-                exercisesStackView.addArrangedSubview(exerciseView)
-            }
-            
-            self.indexPath = indexPath
-            self.toggleVisibilityAction = toggleVisibilityAction
-            isStackViewVisible = data.isStackViewVisible
+        bodyPartLabel.text = "\(data.bodyPart) : \(data.totalSets)세트"
+        
+        exercisesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        for exercise in data.exercises {
+            let exerciseView = HorizontalExerciseView()
+            exerciseView.configure(name: exercise.name, setsCount: exercise.setsCount)
+            exercisesStackView.addArrangedSubview(exerciseView)
         }
+        
+        self.indexPath = indexPath
+        self.toggleVisibilityAction = toggleVisibilityAction
+        isStackViewVisible = data.isStackViewVisible
+    }
 }
 
 class HorizontalExerciseView: UIView {
@@ -155,3 +160,5 @@ class HorizontalExerciseView: UIView {
         setsLabel.text = "\(setsCount)세트"
     }
 }
+
+
