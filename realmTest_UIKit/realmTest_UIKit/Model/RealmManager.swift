@@ -21,6 +21,7 @@ class RealmManager {
         openRealm()
         createExercisesSampleData()
         generateScheduleSampleData()
+        addInbodySampleData()
         
     }
     
@@ -55,6 +56,15 @@ class RealmManager {
     }
     
     
+    func getInBodyData() -> [InBody] {
+        if let localRealm = localRealm {
+            let inBodyData = localRealm.objects(InBody.self)
+            print("inbody Data를 불러왔습니다.")
+            return Array(inBodyData)
+        } else {print("inbody Data를 불러오는데 실패하였습니다.")
+            return []
+        }
+    }
         
     
 }
@@ -147,5 +157,48 @@ extension RealmManager {
             print("Schedule 데이터가 존재합니다.")
         }
     }
+    
+    
+    
+    func addInbodySampleData() {
+        guard let localRealm = localRealm else { return }
+        
+        if localRealm.objects(InBody.self).isEmpty {
+            
+            let sampleInbody: [InBody] = [
+                InBody(date: makeDate(day: 1), weight: 79, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 4), weight: 81, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 8), weight: 98, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 12), weight: 53, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 15), weight: 64, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 19), weight: 67, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 22), weight: 60, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 28), weight: 89, bodyFat: 21, muscleMass: 24),
+                InBody(date: makeDate(day: 29), weight: 56, bodyFat: 21, muscleMass: 24)
+            ]
+            
+            do {
+                try localRealm.write {
+                    localRealm.add(sampleInbody)
+                    print("인바디 샘플 데이터를 추가하였습니다.")
+                }
+            } catch {
+                print(error)
+            }
+        } else {
+            print("이미 인바디 샘플 데이터가 존재합니다.")
+        }
+        
+        
+        func makeDate(year: Int = 2024, month: Int = 8, day: Int) -> Date {
+            var dateComponents = DateComponents()
+            dateComponents.year = year
+            dateComponents.month = month
+            dateComponents.day = day
+            
+            return Calendar.current.date(from: dateComponents) ?? Date()
+        }
+    }
+    
 }
 

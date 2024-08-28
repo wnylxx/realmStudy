@@ -21,6 +21,8 @@
 		189F0B952C756E4400DA70BA /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189F0B942C756E4400DA70BA /* RealmManager.swift */; };
 		189F0B972C758C3400DA70BA /* DataFilteringViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189F0B962C758C3400DA70BA /* DataFilteringViewController.swift */; };
 		18F4F3052C7EB20000F2006C /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F4F3042C7EB20000F2006C /* ChartView.swift */; };
+		18F4F3072C7EBD9700F2006C /* InbodyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F4F3062C7EBD9700F2006C /* InbodyChartView.swift */; };
+		18F4F3092C7ED9B800F2006C /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F4F3082C7ED9B800F2006C /* ChartViewController.swift */; };
 		18FAA0802C77156500B62B8F /* BodyPartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA07F2C77156500B62B8F /* BodyPartData.swift */; };
 		18FAA0832C771B3B00B62B8F /* BodyPartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA0822C771B3B00B62B8F /* BodyPartTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -41,6 +43,8 @@
 		189F0B942C756E4400DA70BA /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		189F0B962C758C3400DA70BA /* DataFilteringViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFilteringViewController.swift; sourceTree = "<group>"; };
 		18F4F3042C7EB20000F2006C /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		18F4F3062C7EBD9700F2006C /* InbodyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InbodyChartView.swift; sourceTree = "<group>"; };
+		18F4F3082C7ED9B800F2006C /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		18FAA07F2C77156500B62B8F /* BodyPartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPartData.swift; sourceTree = "<group>"; };
 		18FAA0822C771B3B00B62B8F /* BodyPartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPartTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +82,7 @@
 			children = (
 				186302322C74D09300CA32AA /* Model */,
 				18FAA0812C7715AF00B62B8F /* ViewController */,
+				18F4F3062C7EBD9700F2006C /* InbodyChartView.swift */,
 				18FAA0822C771B3B00B62B8F /* BodyPartTableViewCell.swift */,
 				1863021E2C74D07D00CA32AA /* AppDelegate.swift */,
 				186302202C74D07D00CA32AA /* SceneDelegate.swift */,
@@ -108,6 +113,7 @@
 			children = (
 				186302222C74D07D00CA32AA /* DataInputViewController.swift */,
 				189F0B962C758C3400DA70BA /* DataFilteringViewController.swift */,
+				18F4F3082C7ED9B800F2006C /* ChartViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -190,8 +196,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				189F0B972C758C3400DA70BA /* DataFilteringViewController.swift in Sources */,
+				18F4F3092C7ED9B800F2006C /* ChartViewController.swift in Sources */,
 				189AE4A72C74E45C0077A1D3 /* Schedule.swift in Sources */,
 				18FAA0832C771B3B00B62B8F /* BodyPartTableViewCell.swift in Sources */,
+				18F4F3072C7EBD9700F2006C /* InbodyChartView.swift in Sources */,
 				189F0B952C756E4400DA70BA /* RealmManager.swift in Sources */,
 				186302392C74D59100CA32AA /* Exercise.swift in Sources */,
 				186302232C74D07D00CA32AA /* DataInputViewController.swift in Sources */,
