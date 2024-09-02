@@ -15,6 +15,17 @@
 		18949F0C2C85E8B40068112A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 18949F0B2C85E8B40068112A /* Base */; };
 		18949F142C85EC750068112A /* ExerciseRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F132C85EC750068112A /* ExerciseRecordViewController.swift */; };
 		18949F162C85EC900068112A /* WeightRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F152C85EC900068112A /* WeightRecordViewController.swift */; };
+		18949F182C85EEC50068112A /* MuscleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F172C85EEC50068112A /* MuscleImageView.swift */; };
+		18949F1A2C85EF260068112A /* ReportBodyPartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F192C85EF260068112A /* ReportBodyPartData.swift */; };
+		18949F1E2C85EFA70068112A /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 18949F1D2C85EFA70068112A /* RealmSwift */; };
+		18949F202C85EFB70068112A /* BodyPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F1F2C85EFB70068112A /* BodyPart.swift */; };
+		18949F252C85F9E10068112A /* TotalNumberPerBodyPartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F242C85F9E10068112A /* TotalNumberPerBodyPartTableViewCell.swift */; };
+		18949F272C86003E0068112A /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F262C86003E0068112A /* Exercise.swift */; };
+		18949F292C8600860068112A /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F282C8600860068112A /* Schedule.swift */; };
+		18949F2B2C8600C50068112A /* InBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F2A2C8600C50068112A /* InBody.swift */; };
+		18949F2D2C8600DC0068112A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F2C2C8600DC0068112A /* RealmManager.swift */; };
+		18949F302C86062C0068112A /* ReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F2F2C86062C0068112A /* ReportsViewModel.swift */; };
+		18949F322C8616060068112A /* MuscleImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F312C8616060068112A /* MuscleImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +39,16 @@
 		18949F0D2C85E8B40068112A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18949F132C85EC750068112A /* ExerciseRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseRecordViewController.swift; sourceTree = "<group>"; };
 		18949F152C85EC900068112A /* WeightRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordViewController.swift; sourceTree = "<group>"; };
+		18949F172C85EEC50068112A /* MuscleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleImageView.swift; sourceTree = "<group>"; };
+		18949F192C85EF260068112A /* ReportBodyPartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBodyPartData.swift; sourceTree = "<group>"; };
+		18949F1F2C85EFB70068112A /* BodyPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyPart.swift; sourceTree = "<group>"; };
+		18949F242C85F9E10068112A /* TotalNumberPerBodyPartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalNumberPerBodyPartTableViewCell.swift; sourceTree = "<group>"; };
+		18949F262C86003E0068112A /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		18949F282C8600860068112A /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		18949F2A2C8600C50068112A /* InBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InBody.swift; sourceTree = "<group>"; };
+		18949F2C2C8600DC0068112A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		18949F2F2C86062C0068112A /* ReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewModel.swift; sourceTree = "<group>"; };
+		18949F312C8616060068112A /* MuscleImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18949F1E2C85EFA70068112A /* RealmSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,15 +84,65 @@
 			children = (
 				18949EFF2C85E8B30068112A /* AppDelegate.swift */,
 				18949F012C85E8B30068112A /* SceneDelegate.swift */,
-				18949F032C85E8B30068112A /* ReportsViewController.swift */,
-				18949F152C85EC900068112A /* WeightRecordViewController.swift */,
-				18949F132C85EC750068112A /* ExerciseRecordViewController.swift */,
+				18949F212C85F81C0068112A /* ViewController */,
+				18949F2E2C8606100068112A /* ViewModel */,
+				18949F232C85F9B10068112A /* TableViewCell */,
+				18949F222C85F82D0068112A /* view */,
+				18949F1B2C85EF310068112A /* Model */,
 				18949F052C85E8B30068112A /* Main.storyboard */,
 				18949F082C85E8B40068112A /* Assets.xcassets */,
 				18949F0A2C85E8B40068112A /* LaunchScreen.storyboard */,
 				18949F0D2C85E8B40068112A /* Info.plist */,
 			);
 			path = MVVMTest;
+			sourceTree = "<group>";
+		};
+		18949F1B2C85EF310068112A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18949F2C2C8600DC0068112A /* RealmManager.swift */,
+				18949F192C85EF260068112A /* ReportBodyPartData.swift */,
+				18949F1F2C85EFB70068112A /* BodyPart.swift */,
+				18949F262C86003E0068112A /* Exercise.swift */,
+				18949F282C8600860068112A /* Schedule.swift */,
+				18949F2A2C8600C50068112A /* InBody.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		18949F212C85F81C0068112A /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				18949F032C85E8B30068112A /* ReportsViewController.swift */,
+				18949F132C85EC750068112A /* ExerciseRecordViewController.swift */,
+				18949F152C85EC900068112A /* WeightRecordViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		18949F222C85F82D0068112A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				18949F172C85EEC50068112A /* MuscleImageView.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		18949F232C85F9B10068112A /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				18949F312C8616060068112A /* MuscleImageTableViewCell.swift */,
+				18949F242C85F9E10068112A /* TotalNumberPerBodyPartTableViewCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		18949F2E2C8606100068112A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				18949F2F2C86062C0068112A /* ReportsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -89,6 +161,9 @@
 			dependencies = (
 			);
 			name = MVVMTest;
+			packageProductDependencies = (
+				18949F1D2C85EFA70068112A /* RealmSwift */,
+			);
 			productName = MVVMTest;
 			productReference = 18949EFC2C85E8B30068112A /* MVVMTest.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +192,9 @@
 				Base,
 			);
 			mainGroup = 18949EF32C85E8B30068112A;
+			packageReferences = (
+				18949F1C2C85EFA70068112A /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 18949EFD2C85E8B30068112A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -144,10 +222,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18949F2D2C8600DC0068112A /* RealmManager.swift in Sources */,
+				18949F2B2C8600C50068112A /* InBody.swift in Sources */,
 				18949F042C85E8B30068112A /* ReportsViewController.swift in Sources */,
+				18949F322C8616060068112A /* MuscleImageTableViewCell.swift in Sources */,
 				18949F002C85E8B30068112A /* AppDelegate.swift in Sources */,
+				18949F292C8600860068112A /* Schedule.swift in Sources */,
 				18949F162C85EC900068112A /* WeightRecordViewController.swift in Sources */,
+				18949F252C85F9E10068112A /* TotalNumberPerBodyPartTableViewCell.swift in Sources */,
+				18949F182C85EEC50068112A /* MuscleImageView.swift in Sources */,
+				18949F272C86003E0068112A /* Exercise.swift in Sources */,
+				18949F1A2C85EF260068112A /* ReportBodyPartData.swift in Sources */,
+				18949F302C86062C0068112A /* ReportsViewModel.swift in Sources */,
 				18949F022C85E8B30068112A /* SceneDelegate.swift in Sources */,
+				18949F202C85EFB70068112A /* BodyPart.swift in Sources */,
 				18949F142C85EC750068112A /* ExerciseRecordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,6 +457,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18949F1C2C85EFA70068112A /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18949F1D2C85EFA70068112A /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18949F1C2C85EFA70068112A /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18949EF42C85E8B30068112A /* Project object */;
 }

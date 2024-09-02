@@ -9,8 +9,16 @@ import UIKit
 
 class ReportsViewController: UIViewController {
     
+    private var reportsVM = ReportsViewModel()
+    
     private var currentVC: UIViewController?
-    private let exerciseRecordVC = ExerciseRecordViewController()
+    
+    private lazy var exerciseRecordVC: ExerciseRecordViewController = {
+        let vc = ExerciseRecordViewController(reportsVM: self.reportsVM)
+        return vc
+    }()
+    
+    
     private let weightRecordVC = WeightRecordViewController()
 
     private lazy var titleStackView: UIStackView = {
