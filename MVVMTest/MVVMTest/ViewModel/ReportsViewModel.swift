@@ -29,9 +29,16 @@ class ReportsViewModel {
         self.fetchAndCalculateCurrentMonthData()
     }
     
+    func updateYearAndMonth(year: Int, month: Int) {
+        self.currentYear = year
+        self.currentMonth = month
+        fetchAndCalculateCurrentMonthData()
+    }
+    
     
     func fetchAndCalculateCurrentMonthData() {
-        let _ = fetchMonthSchedules(year: currentYear, month: currentMonth)
+        let schedules = fetchMonthSchedules(year: currentYear, month: currentMonth)
+        (bodyPartDataList, top5Exercises, top3WeightChangeExercises) = calculateSetsByBodyPartAndExercise(schedules: schedules)
     }
     
     

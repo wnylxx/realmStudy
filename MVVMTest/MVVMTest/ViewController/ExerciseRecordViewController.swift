@@ -49,6 +49,10 @@ class ExerciseRecordViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
+    func fetchDataAndUpdateUI() {
+            exerciseRecordTableView.reloadData()
+        }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return reportsVM.bodyPartDataList.isEmpty ? 1 : 2
     }
@@ -56,7 +60,7 @@ class ExerciseRecordViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if reportsVM.bodyPartDataList.isEmpty {
-            return 1
+            return 0
         }
         
         switch section {

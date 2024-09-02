@@ -13,6 +13,15 @@ class ReportsViewController: UIViewController {
     
     private var currentVC: UIViewController?
     
+    private var currentYear: Int {
+        return reportsVM.currentYear
+    }
+    
+    private var currentMonth: Int {
+        return reportsVM.currentMonth
+    }
+    
+    
     private lazy var exerciseRecordVC: ExerciseRecordViewController = {
         let vc = ExerciseRecordViewController(reportsVM: self.reportsVM)
         return vc
@@ -86,6 +95,7 @@ class ReportsViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        updateTitleMonthLabel()
         
     }
 
@@ -108,13 +118,44 @@ class ReportsViewController: UIViewController {
     
     
     private func didTapPreviousMonth() {
-        
+        if currentMonth == 1 {
+            reportsVM.updateYearAndMonth(year: currentYear - 1, month: 12)
+        } else {
+            reportsVM.updateYearAndMonth(year: currentYear, month: currentMonth - 1)
+        }
+        updateTitleMonthLabel()
+        fetchAndUpdateData()
     }
     
     private func didTapNextMonth() {
-        
-        
+        if currentMonth == 12 {
+            reportsVM.updateYearAndMonth(year: currentYear + 1, month: 1)
+        } else {
+            reportsVM.updateYearAndMonth(year: currentYear, month: currentMonth + 1)
+        }
+        updateTitleMonthLabel()
+        fetchAndUpdateData()
     }
+    
+    
+    private func updateTitleMonthLabel() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy년 M월 리포트"
+        
+        if let date = Calendar.current.date(from: DateComponents(year: currentYear, month: currentMonth)) {
+            titleMonthLabel.text = dateFormatter.string(from: date)
+        }
+    }
+    
+    private func fetchAndUpdateData() {
+        reportsVM.fetchAndCalculateCurrentMonthData()
+        
+        exerciseRecordVC.fetchDataAndUpdateUI()
+    }
+    
+    
+    
     
     @objc private func didChangeValue(_ sender: UISegmentedControl) {
         let selectedIndex = sender.selectedSegmentIndex
