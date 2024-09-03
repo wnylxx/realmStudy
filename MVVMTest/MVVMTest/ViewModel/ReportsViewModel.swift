@@ -7,17 +7,20 @@
 
 import Foundation
 import RealmSwift
+import Combine
 
 
 class ReportsViewModel {
     let realm = RealmManager.shared.realm
     
-    var bodyPartDataList: [ReportBodyPartData] = []
-    var top5Exercises: [ExerciseSets] = []
-    var top3WeightChangeExercises: [ExerciseSets] = []
+    @Published var bodyPartDataList: [ReportBodyPartData] = []
+    @Published var top5Exercises: [ExerciseSets] = []
+    @Published var top3WeightChangeExercises: [ExerciseSets] = []
     
     var currentYear: Int
     var currentMonth: Int
+    
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         let currentDate = Date()

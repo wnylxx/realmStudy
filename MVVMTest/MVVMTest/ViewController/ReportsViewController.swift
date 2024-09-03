@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class ReportsViewController: UIViewController {
     
     private var reportsVM = ReportsViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
     private var currentVC: UIViewController?
     
@@ -96,6 +98,13 @@ class ReportsViewController: UIViewController {
         
         setupUI()
         updateTitleMonthLabel()
+        
+        reportsVM.$bodyPartDataList
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.exerciseRecordVC.fetchDataAndUpdateUI()
+            }
+            .store(in: &cancellables)
         
     }
 
