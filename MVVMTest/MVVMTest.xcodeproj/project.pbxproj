@@ -26,6 +26,8 @@
 		18949F2D2C8600DC0068112A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F2C2C8600DC0068112A /* RealmManager.swift */; };
 		18949F302C86062C0068112A /* ReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F2F2C86062C0068112A /* ReportsViewModel.swift */; };
 		18949F322C8616060068112A /* MuscleImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F312C8616060068112A /* MuscleImageTableViewCell.swift */; };
+		18949F3A2C86E9600068112A /* InBodyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F392C86E9600068112A /* InBodyChartView.swift */; };
+		18949F3C2C86EA170068112A /* InBodyChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18949F3B2C86EA170068112A /* InBodyChartViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 		18949F2C2C8600DC0068112A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		18949F2F2C86062C0068112A /* ReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewModel.swift; sourceTree = "<group>"; };
 		18949F312C8616060068112A /* MuscleImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuscleImageTableViewCell.swift; sourceTree = "<group>"; };
+		18949F392C86E9600068112A /* InBodyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InBodyChartView.swift; sourceTree = "<group>"; };
+		18949F3B2C86EA170068112A /* InBodyChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InBodyChartViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				18949F172C85EEC50068112A /* MuscleImageView.swift */,
+				18949F392C86E9600068112A /* InBodyChartView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				18949F2F2C86062C0068112A /* ReportsViewModel.swift */,
+				18949F3B2C86EA170068112A /* InBodyChartViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -222,6 +228,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18949F3C2C86EA170068112A /* InBodyChartViewModel.swift in Sources */,
+				18949F3A2C86E9600068112A /* InBodyChartView.swift in Sources */,
 				18949F2D2C8600DC0068112A /* RealmManager.swift in Sources */,
 				18949F2B2C8600C50068112A /* InBody.swift in Sources */,
 				18949F042C85E8B30068112A /* ReportsViewController.swift in Sources */,

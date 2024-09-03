@@ -11,6 +11,8 @@ import Combine
 class ReportsViewController: UIViewController {
     
     private var reportsVM = ReportsViewModel()
+    private var inBodyVM = InBodyChartViewModel()
+    
     private var cancellables = Set<AnyCancellable>()
     
     private var currentVC: UIViewController?
@@ -28,7 +30,6 @@ class ReportsViewController: UIViewController {
         let vc = ExerciseRecordViewController(reportsVM: self.reportsVM)
         return vc
     }()
-    
     
     private let weightRecordVC = WeightRecordViewController()
 
@@ -106,34 +107,33 @@ class ReportsViewController: UIViewController {
             }
             .store(in: &cancellables)
         
+        
+        
     }
 
-        
-    
-    
-    
-    private func createMonthButton(action: UIAction, imageName: String) -> UIButton {
-        let button = UIButton(type: .custom)
-        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .black)
-        var config = UIButton.Configuration.plain()
-        config.image = UIImage(systemName: imageName, withConfiguration: symbolConfig)
-        config.baseForegroundColor = .white
-        button.configuration = config
-        
-        button.addAction(action, for: .touchUpInside)
-        return button
-    }
+
     
     
     
     private func didTapPreviousMonth() {
+        let newYear: Int
+        let newMonth: Int
+        
         if currentMonth == 1 {
-            reportsVM.updateYearAndMonth(year: currentYear - 1, month: 12)
+            newYear = currentYear - 1
+            newMonth = 12
         } else {
-            reportsVM.updateYearAndMonth(year: currentYear, month: currentMonth - 1)
+            newYear = currentYear
+            newMonth = currentMonth - 1
         }
+        
+        reportsVM.updateYearAndMonth(year: newYear, month: newMonth)
+        inBodyVM.updateYearAndMonth(year: newYear, month: newMonth)
+        
+        
         updateTitleMonthLabel()
-        fetchAndUpdateData()
+        exerciseRecordVC.fetchDataAndUpdateUI()
+        
     }
     
     private func didTapNextMonth() {
@@ -143,7 +143,7 @@ class ReportsViewController: UIViewController {
             reportsVM.updateYearAndMonth(year: currentYear, month: currentMonth + 1)
         }
         updateTitleMonthLabel()
-        fetchAndUpdateData()
+        exerciseRecordVC.fetchDataAndUpdateUI()
     }
     
     
@@ -156,13 +156,6 @@ class ReportsViewController: UIViewController {
             titleMonthLabel.text = dateFormatter.string(from: date)
         }
     }
-    
-    private func fetchAndUpdateData() {
-        reportsVM.fetchAndCalculateCurrentMonthData()
-        
-        exerciseRecordVC.fetchDataAndUpdateUI()
-    }
-    
     
     
     
@@ -186,6 +179,17 @@ class ReportsViewController: UIViewController {
         
     }
     
+    private func createMonthButton(action: UIAction, imageName: String) -> UIButton {
+        let button = UIButton(type: .custom)
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 12, weight: .black)
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(systemName: imageName, withConfiguration: symbolConfig)
+        config.baseForegroundColor = .white
+        button.configuration = config
+        
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }
     
 }
 
