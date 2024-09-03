@@ -30,8 +30,10 @@ class ReportsViewController: UIViewController {
         let vc = ExerciseRecordViewController(reportsVM: self.reportsVM)
         return vc
     }()
-    
-    private let weightRecordVC = WeightRecordViewController()
+    private lazy var weightRecordVC: WeightRecordViewController = {
+        let vc = WeightRecordViewController(inBodyVM: self.inBodyVM)
+        return vc
+    }()
 
     private lazy var titleStackView: UIStackView = {
         let stackView = UIStackView()
@@ -137,11 +139,21 @@ class ReportsViewController: UIViewController {
     }
     
     private func didTapNextMonth() {
+        let newYear: Int
+        let newMonth: Int
+        
         if currentMonth == 12 {
-            reportsVM.updateYearAndMonth(year: currentYear + 1, month: 1)
+            newYear = currentYear + 1
+            newMonth = 1
         } else {
-            reportsVM.updateYearAndMonth(year: currentYear, month: currentMonth + 1)
+            newYear = currentYear
+            newMonth = currentMonth + 1
         }
+        
+        reportsVM.updateYearAndMonth(year: newYear, month: newMonth)
+        inBodyVM.updateYearAndMonth(year: newYear, month: newMonth)
+        
+        
         updateTitleMonthLabel()
         exerciseRecordVC.fetchDataAndUpdateUI()
     }

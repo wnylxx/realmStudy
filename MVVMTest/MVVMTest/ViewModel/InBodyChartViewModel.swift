@@ -12,12 +12,7 @@ import RealmSwift
 class InBodyChartViewModel: ObservableObject {
     private let realm = RealmManager.shared.realm
     
-    @Published var inBodyData: [InBody] = [] {
-        didSet {
-            print("inBody가 변경되었습니다.: \(inBodyData.count)")
-        }
-    }
-    
+    @Published var inBodyData: [InBody] = []
     
     @Published var inbodyRecords: [InBody] = []
     

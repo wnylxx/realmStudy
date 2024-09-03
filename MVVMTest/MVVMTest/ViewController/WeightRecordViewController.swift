@@ -10,9 +10,17 @@ import SwiftUI
 
 class WeightRecordViewController: UIViewController {
     
-    private var viewModel = InBodyChartViewModel()
+    private let inBodyVM: InBodyChartViewModel
     private var hostingController: UIHostingController<InBodyChartView>?
     
+    init(inBodyVM: InBodyChartViewModel) {
+        self.inBodyVM = inBodyVM
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func viewDidLoad() {
@@ -27,7 +35,7 @@ class WeightRecordViewController: UIViewController {
         view.backgroundColor = UIColor(named: "ColorPrimary")
         
         // MARK: chartView (SwiftUI) 삽입
-        let chartView = InBodyChartView(viewModel: viewModel)
+        let chartView = InBodyChartView(viewModel: inBodyVM)
         hostingController = UIHostingController(rootView: chartView)
         hostingController?.view.backgroundColor = .clear
         
